@@ -11,10 +11,10 @@ environment:
     ARCH: amd64
   - TARGET: x86_64-pc-windows-gnu
     ARCH: amd64
-    BITS: 32
+    BITS: 64
   - TARGET: i686-pc-windows-gnu
     ARCH: x86
-    BITS: 64
+    BITS: 32
 
 install:
   - IF "%MSVC%"=="" set PATH=C:\msys64\mingw%BITS%\bin;C:\msys64\usr\bin;%PATH%
