@@ -1,9 +1,6 @@
 environment:
   CFG_DISABLE_CROSS_TESTS: 1
   matrix:
-  - TARGET: x86_64-pc-windows-gnu
-    ARCH: amd64
-    BITS: 64
   - TARGET: i686-pc-windows-gnu
     ARCH: x86
     BITS: 32
