@@ -1,5 +1,8 @@
 language: rust
-sudo: false
+sudo: required
+services:
+  - docker
+
 install:
   - curl https://static.rust-lang.org/rustup.sh | sh -s -- --add-target=$TARGET --disable-sudo -y --prefix=`rustc --print sysroot`
 
@@ -46,6 +49,11 @@ matrix:
       rust: stable
     - env: TARGET=i686-unknown-linux-gnu
       rust: stable
+      addons:
+        apt:
+          packages:
+            - gcc-multilib
+            - libssl-dev:i386
     - env: TARGET=x86_64-unknown-linux-gnu
       rust: beta
     - env: TARGET=x86_64-unknown-linux-gnu
@@ -53,18 +61,36 @@ matrix:
     # Crosses test only on stable
     - env: TARGET=arm-unknown-linux-gnueabi
       rust: stable
+      addons:
+        apt:
+          packages:
+            - gcc-arm-linux-gnueabi
     - env: TARGET=arm-unknown-linux-gnueabihf
       rust: stable
+      addons:
+        apt:
+          packages:
+            - gcc-arm-linux-gnueabihf
     - env: TARGET=armv7-unknown-linux-gnueabihf
       rust: stable
+      addons:
+        apt:
+          packages:
+            - gcc-arm-linux-gnueabihf
     - env: TARGET=aarch64-unknown-linux-gnu
       rust: stable
+      addons:
+        apt:
+          packages:
+            - gcc-aarch64-linux-gnu
     - env: TARGET=x86_64-unknown-freebsd
       rust: stable
+      script:
+        - sh ci/run-docker.sh $TARGET
     - env: TARGET=x86_64-unknown-netbsd
       rust: stable
-    - env: TARGET=i686-unknown-freebsd
-      rust: stable
+      script:
+        - sh ci/run-docker.sh $TARGET
 
 branches:
   only:
@@ -76,5 +102,3 @@ addons:
       - kalakris-cmake
     packages:
       - cmake
-      - g++-multilib
-      - lib32stdc++6
