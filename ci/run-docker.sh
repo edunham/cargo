@@ -14,7 +14,7 @@ run() {
       -w /checkout \
       --privileged \
       -it cargo \
-      curl https://static.rust-lang.org/rustup.sh | sh -s -- --add-target=$1 --disable-sudo -y --prefix=`rustc --print sysroot`; ./configure --prefix=$HOME/cargo-install --disable-cross-tests --disable-optimize --target=$1; make
+      "./configure --prefix=$HOME/cargo-install --disable-cross-tests --disable-optimize --target=$1; make"
 }
 
 if [ -z "$1" ]; then

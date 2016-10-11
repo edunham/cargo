@@ -60,33 +60,37 @@ matrix:
     # rust: nightly
     # Crosses test only on stable
     - env: TARGET=arm-unknown-linux-gnueabi
+      script:
+        - sh ci/run-docker.sh $TARGET
       rust: stable
       addons:
         apt:
           packages:
             - gcc-arm-linux-gnueabi
-            - cmake=2.8.11
     - env: TARGET=arm-unknown-linux-gnueabihf
+      script:
+        - sh ci/run-docker.sh $TARGET
       rust: stable
       addons:
         apt:
           packages:
             - gcc-arm-linux-gnueabihf
-            - cmake=2.8.11
     - env: TARGET=armv7-unknown-linux-gnueabihf
+      script:
+        - sh ci/run-docker.sh $TARGET
       rust: stable
       addons:
         apt:
           packages:
             - gcc-arm-linux-gnueabihf
-            - cmake=2.8.11
     - env: TARGET=aarch64-unknown-linux-gnu
+      script:
+        - sh ci/run-docker.sh $TARGET
       rust: stable
       addons:
         apt:
           packages:
             - gcc-aarch64-linux-gnu
-            - cmake=2.8.11
     - env: TARGET=x86_64-unknown-freebsd
       rust: stable
       script:
